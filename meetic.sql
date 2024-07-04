@@ -13,7 +13,7 @@ CREATE TABLE user
     date_naissance DATE,
     genre VARCHAR(100),
     ville VARCHAR(255),
-    email VARCHAR(255) NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL,
     mdp VARCHAR(100),
     loisir VARCHAR(255)
 );

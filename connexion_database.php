@@ -1,12 +1,10 @@
-<!-- <?php
-
-// class Database {
-
-//     private $connection;
-
-
-    
-// }
-
-// $base = new Database;
-// $base->__construct();
+<?php
+$user = 'ambroise';
+$password = 'youhou';
+$dsn = 'mysql:dbname=meetic;host=localhost';
+try {
+    $db = new PDO($dsn, $user, $password);
+} catch (Exception $e) {
+    echo $e->getMessage();
+    die;
+}

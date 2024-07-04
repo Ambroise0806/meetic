@@ -1,0 +1,102 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom right, #ff9966, #ff5e62);
+
+}
+
+#user-details {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: antiquewhite;
+    width: 30%;
+}
+
+.suivant-btn,
+.precedent-btn {
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+main p {
+    display: flex;
+    justify-content: center;
+}
+
+main h2 {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+main ul {
+    display: flex;
+    justify-content: center;
+}
+
+#nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+label {
+    margin-right: 20px; 
+}
+
+select,
+input[type="text"] {
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+select {
+    max-width: 150px;
+}
+
+.incrementer-btn {
+    display: flex;
+    justify-content: center;
+}
+
+#container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.form-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
+}

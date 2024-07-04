@@ -18,41 +18,59 @@
     <a href="view.php">Vous n'êtes pas encore inscrit ?</a>
     </form>
     <?php
-class connection {
+class Connection {
     private $base;
-    private $email;
-    private $mdp;
     private $host = "localhost";
     private $dbName = "meetic";
     private $user = "ambroise";
     private $password = "youhou";
+
     public function __construct() {
         try {
             $this->base = new PDO("mysql:host=$this->host;dbname=$this->dbName", $this->user, $this->password);
             $this->base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (Exception $e) {
-            echo "Connectaymerictrinh@hotmail.comion failed: " . $e->getMessage();
+            echo "Erreur de connexion à la base de données : " . $e->getMessage();
         }
     }
-    function connect($email, $mdp, $hash) {
-        $pd = password_verify($mdp, $hash);
-        // var_dump($hash);
-        $con = $this->base->prepare("SELECT * FROM user WHERE email LIKE '$email' AND mdp LIKE '$hash'");
-        $con->execute(); 
-        var_dump($con);
-        $user = $con->fetchAll();
-        print_r($user);
-        if ($user) {
-            echo "email existe";
-        } else {
-            echo "email n'existe pas";
+
+    function logIn($email, $mdp) {
+        if ($email != "" && $mdp != "") {
+            try {
+                $stmt = $this->base->prepare("SELECT * FROM user WHERE email = :email");
+                $stmt->bindParam(':email', $email);
+                $stmt->execute();
+                $user = $stmt->fetch(PDO::FETCH_ASSOC);
+                if ($user) {
+                    if (password_verify($mdp, $user['mdp'])) {
+                        session_start();
+                        $_SESSION['id'] = $user['id'];
+                        $_SESSION['nom'] = $user['nom'];
+                        $_SESSION['prenom'] = $user['prenom'];
+                        $_SESSION['email'] = $user['email'];
+                        $_SESSION['ville'] = $user['ville'];
+                        $_SESSION['genre'] = $user['genre'];
+                        $_SESSION['loisir'] = $user['loisir'];
+                        $_SESSION['date'] = $user['date_naissance'];
+                        header("Location: profil.php");
+                        exit();
+                    } else {
+                        echo 'Mot de passe incorrect.';
+                    }
+                } else {
+                    echo "L'utilisateur n'existe pas.";
+                }
+            } catch (Exception $e) {
+                echo "Erreur lors de la connexion : " . $e->getMessage();
+            }
         }
-    } 
+    }
 }
-    $form = new connection();
-    $form->connect(
-        $_POST['email'],
-        $_POST['mdp'],
-    );
+
+$form = new Connection();
+$form->logIn(
+    $_POST['email'],
+    $_POST['mdp']
+);
 ?>
-    </body>
+</body>
